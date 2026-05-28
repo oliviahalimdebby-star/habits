@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-mono: "Plus Jakarta Sans", monospace;
+  
+  --color-surface-container: #f1eedb;
+  --color-on-secondary-container: #7a532a;
+  --color-error-container: #ffdad6;
+  --color-outline-variant: #c3c8bf;
+  --color-on-tertiary-fixed-variant: #5a4400;
+  --color-secondary-fixed-dim: #f0bd8b;
+  --color-on-primary-fixed-variant: #364c35;
+  --color-surface: #fdfae7;
+  --color-on-tertiary-container: #fffbff;
+  --color-on-primary-container: #f7fff1;
+  --color-inverse-primary: #b4cdb0;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-secondary-fixed-variant: #623f18;
+  --color-secondary-container: #ffca98;
+  --color-primary-fixed-dim: #b4cdb0;
+  --color-on-secondary: #ffffff;
+  --color-secondary-fixed: #ffdcbd;
+  --color-surface-variant: #e6e3d0;
+  --color-inverse-surface: #313124;
+  --color-tertiary-fixed-dim: #e7c268;
+  --color-on-tertiary: #ffffff;
+  --color-background: #fdfae7;
+  --color-on-error-container: #93000a;
+  --color-surface-container-highest: #e6e3d0;
+  --color-on-error: #ffffff;
+  --color-inverse-on-surface: #f4f1de;
+  --color-on-primary-fixed: #0b200d;
+  --color-on-surface: #1c1c11;
+  --color-on-surface-variant: #434841;
+  --color-on-secondary-fixed: #2c1600;
+  --color-primary: #1B4332;
+  --color-secondary: #52B788;
+  --color-accent: #D8F3DC;
+  --color-background: #081C15;
+  --color-surface: #0b291d;
+  --color-surface-container: #113c2c;
+  --color-surface-container-low: #092317;
+  --color-surface-container-high: #194e3a;
+  --color-surface-container-lowest: #05140f;
+  --color-surface-container-highest: #205c45;
+  --color-on-surface: #f5fff6;
+  --color-on-surface-variant: #b0cdbe;
+  --color-outline: #386f58;
+  --color-outline-variant: #23543f;
+  --color-error: #ff6b6b;
+  --color-on-error: #ffffff;
+  --color-primary-container: #1b4332;
+  --color-on-primary-container: #d8f3dc;
+  --color-secondary-container: #205c45;
+  --color-on-secondary-container: #52b788;
+}
+
+body {
+  background-color: #081C15;
+  color: #f5fff6;
+  font-family: var(--font-sans);
+  background-image: radial-gradient(circle at 2px 2px, #113c2c 1px, transparent 0);
+  background-size: 32px 32px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tome-bg {
+  background-image: radial-gradient(circle at 50% 50%, #0b291d 0%, #081C15 100%);
+  position: relative;
+}
+
+.tome-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBCNq9axMSfB8RT5Jmky0Ifug8B3tqJ8PzQ_bYA-sUnNrFsNz8kw1yTauzFc5vkxMX0KSRwHQAnALDlOvKeUkKBYWW4lrBPa37Jjnkn2Afghe2vqKKj3p2RsdYg2kHRLhxZQ_GqKOQigvA6m_UNgThrzztqLhFop2SncAnK23zygdpVa-dup-OzA7E0egt9WzmukBsDC27AThDB8thtoiJMgQyQqW9GyfCYqaB0v4agpoKQzkgFklVH12dod-q1gdsd4kNEC8E4E9g3);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.parchment-card {
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD7GSVanVlGrnWbrr-x3sB9iA1lg9sVGOrGzn5Sw7fBNZ-TpHWfrRYdN0T8dvcwP5429kzu9YQAi0MFzWmqngEtRAJe9x1QBtvsO6cI-uFQX-GstscNaswNZUCsoJKxTb_cx5eU4mH-MK6YNBZyiHlZGhkWMKNet1i4nEq9P-9eAD2b1I5S1Ms_fzflADIa2p2QucGrDO10JFdanYvvSxmjC1CG6a6Wiu0G_RcKPQBNV_pdd_79DnqUFRwV2i-j1xI5Jhs98nsHfRvN);
+  box-shadow: 0 4px 20px rgba(74, 63, 53, 0.08);
+}
+
+.parchment-texture {
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCzoVnAjK6_XF-wKJrm7Cjv-MrLk5WcMYgRZPoICwDocwoaMC4PVALLZRUGJMI3CQNicFjawx8il_GCiGBERsUjQlZN-3pUiVQoEs8MDVxw6GI3Se04WOfYWTsvqQOnsMElyg7CtcW7LGBBfDSdjKEIQ-zq8UO3dhRIxsEWT-WRun5zsVQON1rSQ5RWS-7TR1bemIiueG0eaje8O1kpmzfcHGW-lyHMFttUtvldF6R7-18PqH7BeNZlIkTp7S4bDeabrT6Ws2dqmFn1);
+}
+
+.evolution-vine {
+  background: linear-gradient(90deg, transparent 0%, #e7c268 20%, #e7c268 80%, transparent 100%);
+  height: 4px;
+  box-shadow: 0 0 12px rgba(231, 194, 104, 0.4);
+}
+
+.hero-glow {
+  box-shadow: 0 0 40px rgba(180, 205, 176, 0.5), inset 0 0 20px rgba(180, 205, 176, 0.2);
+}
+
+.vine-progress {
+  background: linear-gradient(90deg, #4b6249 0%, #b4cdb0 100%);
+}
+
+.quest-card-shadow {
+  box-shadow: 0 4px 20px rgba(74, 63, 53, 0.08);
+}
+
+.squishy-hover {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.squishy-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(74, 63, 53, 0.12);
+}
+
+.squishy-hover:active {
+  transform: scale(0.98);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes soft-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.active-node {
+  animation: soft-pulse 3s infinite ease-in-out;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e6e3d0;
+  border-radius: 10px;
+}

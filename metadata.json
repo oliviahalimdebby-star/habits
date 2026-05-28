@@ -1,0 +1,6 @@
+{
+  "name": "Growdaily",
+  "description": "A cozy, fantasy RPG-themed habit tracker and mystical item shop designed to make self-improvement a legendary journey.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

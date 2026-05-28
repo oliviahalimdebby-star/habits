@@ -1,0 +1,72 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Catch-all safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper primitives
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUser(incoming());
+      allow update: if isOwner(userId) && isValidUser(incoming()) && (
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'userId', 'email', 'username', 'level', 'xp', 'xpNeeded', 'gems',
+          'strength', 'wisdom', 'spirit', 'habitCompletionRate',
+          'streakDays', 'streakActive', 'bunnyStage', 'bunnyXp', 'bunnyXpNeeded',
+          'selectedTrail', 'ownedItems', 'dailyStreakShieldActive', 'xpBoostEnd',
+          'doubleXpBoostEnd', 'avatarBadgeActive', 'lastCompletedDate',
+          'perfectDaysCount', 'bestStreak', 'habits'
+        ])
+      );
+      allow delete: if false;
+
+      function isValidUser(user) {
+        return user.userId is string && user.userId.size() <= 128
+          && user.email is string && user.email.size() <= 200
+          && user.username is string && user.username.size() <= 60
+          && user.level is int
+          && user.xp is int
+          && user.gems is int;
+      }
+
+      match /notes/{noteId} {
+        allow list, get: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(noteId) && isValidNote(incoming());
+        allow update: if isOwner(userId) && isValidId(noteId) && isValidNote(incoming()) && (
+          incoming().diff(existing()).affectedKeys().hasOnly(['title', 'content', 'date'])
+        );
+        allow delete: if isOwner(userId);
+
+        function isValidNote(note) {
+          return note.id is string && note.id.size() <= 128
+            && note.userId == request.auth.uid
+            && note.date is string && note.date.size() <= 20
+            && note.title is string && note.title.size() <= 100
+            && note.content is string && note.content.size() <= 5000;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile state in the Growdaily database covering metrics, stats, streaks, current habits and shop items.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier of the authenticated user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Primary email of the adventurer."
+        },
+        "username": {
+          "type": "string",
+          "description": "Adventurer name or title."
+        },
+        "level": {
+          "type": "integer"
+        },
+        "xp": {
+          "type": "integer"
+        },
+        "xpNeeded": {
+          "type": "integer"
+        },
+        "gems": {
+          "type": "integer"
+        },
+        "strength": {
+          "type": "integer"
+        },
+        "wisdom": {
+          "type": "integer"
+        },
+        "spirit": {
+          "type": "integer"
+        },
+        "habitCompletionRate": {
+          "type": "integer"
+        },
+        "streakDays": {
+          "type": "integer"
+        },
+        "streakActive": {
+          "type": "boolean"
+        },
+        "bunnyStage": {
+          "type": "string"
+        },
+        "bunnyXp": {
+          "type": "integer"
+        },
+        "bunnyXpNeeded": {
+          "type": "integer"
+        },
+        "selectedTrail": {
+          "type": "string"
+        },
+        "ownedItems": {
+          "type": "array"
+        },
+        "dailyStreakShieldActive": {
+          "type": "boolean"
+        },
+        "xpBoostEnd": {
+          "type": "string"
+        },
+        "doubleXpBoostEnd": {
+          "type": "string"
+        },
+        "avatarBadgeActive": {
+          "type": "boolean"
+        },
+        "lastCompletedDate": {
+          "type": "string"
+        },
+        "perfectDaysCount": {
+          "type": "integer"
+        },
+        "bestStreak": {
+          "type": "integer"
+        },
+        "habits": {
+          "type": "object"
+        }
+      },
+      "required": ["userId", "email", "username", "level", "xp", "gems"]
+    },
+    "JournalNote": {
+      "title": "JournalNote",
+      "description": "Chronicle written by the user as an adventure log entry.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "userId", "date", "title", "content"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Primary user profiles with detailed fantasy metrics."
+    },
+    "/users/{userId}/notes/{noteId}": {
+      "schema": "JournalNote",
+      "description": "Offline journey logs and medieval chronicles."
+    }
+  }
+}
