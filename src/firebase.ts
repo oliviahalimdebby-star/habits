@@ -8,8 +8,20 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
+// Support both static json config and environment variables for high flexibility (e.g. Netlify deployment environment setup)
+const metaEnv = (import.meta as any).env || {};
+const resolvedConfig = {
+  apiKey: metaEnv.VITE_FIREBASE_API_KEY || firebaseConfig.apiKey || "",
+  authDomain: metaEnv.VITE_FIREBASE_AUTH_DOMAIN || firebaseConfig.authDomain || "",
+  projectId: metaEnv.VITE_FIREBASE_PROJECT_ID || firebaseConfig.projectId || "",
+  storageBucket: metaEnv.VITE_FIREBASE_STORAGE_BUCKET || firebaseConfig.storageBucket || "",
+  messagingSenderId: metaEnv.VITE_FIREBASE_MESSAGING_SENDER_ID || firebaseConfig.messagingSenderId || "",
+  appId: metaEnv.VITE_FIREBASE_APP_ID || firebaseConfig.appId || "",
+  firestoreDatabaseId: metaEnv.VITE_FIREBASE_FIRESTORE_DATABASE_ID || firebaseConfig.firestoreDatabaseId || "(default)"
+};
+
 // Detect if Firebase setup is complete
-export const isFirebaseConfigured = !!(firebaseConfig.apiKey && firebaseConfig.apiKey !== "");
+export const isFirebaseConfigured = !!(resolvedConfig.apiKey && resolvedConfig.apiKey !== "");
 
 let appInstance: any = null;
 let dbInstance: any = null;
@@ -17,8 +29,8 @@ let authInstance: any = null;
 
 if (isFirebaseConfigured) {
   try {
-    appInstance = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-    dbInstance = getFirestore(appInstance, firebaseConfig.firestoreDatabaseId || "(default)");
+    appInstance = getApps().length === 0 ? initializeApp(resolvedConfig) : getApps()[0];
+    dbInstance = getFirestore(appInstance, resolvedConfig.firestoreDatabaseId || "(default)");
     authInstance = getAuth(appInstance);
   } catch (err) {
     console.error("Firebase services initialization failed:", err);
